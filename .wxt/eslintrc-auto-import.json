@@ -4,6 +4,7 @@
     "InvalidMatchPattern": true,
     "MatchPattern": true,
     "MigrationError": true,
+    "NoteLayout": true,
     "browser": true,
     "createIframeUi": true,
     "createIntegratedUi": true,

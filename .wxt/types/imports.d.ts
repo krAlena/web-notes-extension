@@ -5,6 +5,7 @@ declare global {
   const InvalidMatchPattern: typeof import('wxt/sandbox')['InvalidMatchPattern']
   const MatchPattern: typeof import('wxt/sandbox')['MatchPattern']
   const MigrationError: typeof import('wxt/storage')['MigrationError']
+  const NoteLayout: typeof import('D:/My/WXT/web-notes-ext/components/NoteLayout')['default']
   const browser: typeof import('wxt/browser')['browser']
   const createIframeUi: typeof import('wxt/client')['createIframeUi']
   const createIntegratedUi: typeof import('wxt/client')['createIntegratedUi']
