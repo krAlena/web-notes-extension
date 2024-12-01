@@ -31,6 +31,8 @@ export default defineContentScript({
             top: 20px;
             z-index: 1000;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
           `;
 
          // Drag-and-drop logic
@@ -45,17 +47,17 @@ export default defineContentScript({
         const move = (e: MouseEvent) => {
           const windowWidth = window.innerWidth;
           const windowHeight = window.innerHeight;
-
+          let parentPadding = 5;
           let deltaX = e.clientX - offsetX;
           const newLeft = Math.min(
-            Math.max(deltaX, 0),
-            windowWidth - EXT_WIDTH - 3
+            Math.max(deltaX, parentPadding),
+            windowWidth - EXT_WIDTH - parentPadding
           );
 
           let deltaY = e.clientY - offsetY;
           const newTop = Math.min(
-            Math.max(deltaY, 0),
-            windowHeight - EXT_HEIGHT - 3
+            Math.max(deltaY, parentPadding),
+            windowHeight - EXT_HEIGHT - parentPadding
           );
           wrapper.style.left = `${newLeft}px`;
           wrapper.style.top = `${newTop}px`;
