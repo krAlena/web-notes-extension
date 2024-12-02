@@ -11,7 +11,7 @@ export default defineConfig({
     name: "Web notes",
     version: "1.0",
     version_name: "1.0.1-alpha1",
-    permissions: ["tabs", "activeTab"],
+    permissions: ["tabs", "activeTab", "storage"],
     icons: {
       16: "icon/16.png",
       32: "icon/32.png",

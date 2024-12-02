@@ -1,6 +1,8 @@
 import "./style.css";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import { localNotePosition } from "@/utils/storage.ts";
+
 const EXT_WIDTH = 200;
 const EXT_HEIGHT = 300;
 
@@ -9,6 +11,8 @@ export default defineContentScript({
   cssInjectionMode: "ui",
 
   async main(ctx) {
+    const storedStartPosition = await localNotePosition.getValue();
+
     const ui = await createShadowRootUi(ctx, {
       name: "wxt-react-example",
       position: "inline",
@@ -18,6 +22,10 @@ export default defineContentScript({
         // Don't mount react app directly on <body>
         const wrapper = document.createElement("div");
         wrapper.id = "pluginNotes"
+
+        let xCoordinate = storedStartPosition ? storedStartPosition.x + "px" : `calc( 100% - ${EXT_WIDTH}px - 20px)`;
+        let yCoordinate = storedStartPosition ? storedStartPosition.y + "px" : `20px`;
+
         wrapper.style.cssText = `
             position: absolute;
             background-color: rgb(255 244 173);
@@ -27,8 +35,8 @@ export default defineContentScript({
             height: ${EXT_HEIGHT}px;
             position: absolute;
             right: auto;
-            left: calc( 100% - ${EXT_WIDTH}px - 20px);
-            top: 20px;
+            left: ${xCoordinate};
+            top: ${yCoordinate};
             z-index: 1000;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -61,6 +69,8 @@ export default defineContentScript({
           );
           wrapper.style.left = `${newLeft}px`;
           wrapper.style.top = `${newTop}px`;
+
+          void localNotePosition.setValue({ x: newLeft, y: newTop});
         };
 
         const stop = () => {
