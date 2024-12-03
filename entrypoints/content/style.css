@@ -1,6 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+:root {
+  --color-brown-dark: #443235;
+  --color-brown-medium: #654A4E;
+  --color-brown-light: #916A70;
+  --color-beige: #E6DDDE;
+  --color-beige-gray: #B3A9A7;
+  --color-dark-gray: #CBCBCB;
+  --margin-value: 12px;
+}
+
+*::-webkit-scrollbar{
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 1px !important;
+  background: var(--color-beige-gray);
+}
+
+#pluginNotes{
+  background: var(--color-beige);
+}
+
+body * {
+  background: var(--color-beige);
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--color-beige-gray) transparent;
+}
+
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Arsenal', sans-serif;
 }
 
 body {
@@ -14,17 +48,27 @@ textarea.note-content{
   outline: none !important;
   border: none;
   resize: none;
+  line-height: 23px;
+  width: 100%;
+  color: var(--color-brown-dark);
+}
+
+.input-title{
+  font-weight: 600;
+  outline: none;
+  border: none;
 }
 
 .header{
   font-weight: 600;
   cursor: move;
   box-sizing: content-box !important;
-  height: 34px;
+  height: 44px;
   width: 168px;
   align-self: center;
   display: flex;
   align-items: center;
+  color: var(--color-brown-dark);
 }
 
 .header.moving{
