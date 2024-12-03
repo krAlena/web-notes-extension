@@ -8,13 +8,16 @@ body {
   box-sizing: content-box;
 }
 
-.note-content{
+textarea.note-content{
   height: 230px;
-  outline: white;
+  background: transparent;
+  outline: none !important;
+  border: none;
+  resize: none;
 }
 
 .header{
-  font-weight: 500;
+  font-weight: 600;
   cursor: move;
   box-sizing: content-box !important;
   height: 34px;

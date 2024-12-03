@@ -1,7 +1,20 @@
 import React from 'react'
 
 export default function  NoteLayout({}) {
-    const [isExtensionDragging, setIsExtensionDragging] = useState(false);
+    const [isExtensionDragging, setIsExtensionDragging] = useState<boolean>(false);
+    const [noteContent, setNoteContent] = useState<string>("");
+
+    useEffect(() => {
+        readNoteContentFromStorage();
+    }, [])
+
+    async function readNoteContentFromStorage() {
+        let savedNote = await localNoteContent.getValue();
+
+        if (savedNote && savedNote !== ""){
+            setNoteContent(savedNote);
+        }
+    }
 
     const startDraggingExtension = () => {
       setIsExtensionDragging(true)
@@ -13,6 +26,13 @@ export default function  NoteLayout({}) {
         document.body.style.userSelect = 'auto';
     }
 
+    const saveNoteToLocalStore = () => {
+        localNoteContent.setValue(noteContent);
+    }
+
+    const exportToGoogleKeep = () => {
+        alert('exportToGoogleKeep')
+    }
     return (
         <div>
             <div className={`flex-row header ${isExtensionDragging ? "moving" : ""}`}
@@ -21,7 +41,13 @@ export default function  NoteLayout({}) {
             >
                 Your note:
             </div>
-            <div className="note-content" contentEditable></div>
+            <textarea className="note-content"
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNoteContent(e.target.value)}
+                suppressContentEditableWarning
+                onBlur={saveNoteToLocalStore}
+                value={noteContent}
+            />
+            {/* <button onClick={exportToGoogleKeep}>Export to Google keep</button> */}
         </div>
     )
 }
