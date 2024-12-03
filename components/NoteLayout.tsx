@@ -2,17 +2,24 @@ import React from 'react'
 
 export default function  NoteLayout({}) {
     const [isExtensionDragging, setIsExtensionDragging] = useState<boolean>(false);
-    const [noteContent, setNoteContent] = useState<string>("");
+    const [note, setNote] = useState<string>("");
+    const [title, setTitle] = useState<string>("Your note");
+    const [isSaved, setIsSaved] = useState<boolean>(false);
 
     useEffect(() => {
-        readNoteContentFromStorage();
+        readNoteFromStorage();
     }, [])
 
-    async function readNoteContentFromStorage() {
+    async function readNoteFromStorage() {
         let savedNote = await localNoteContent.getValue();
 
-        if (savedNote && savedNote !== ""){
-            setNoteContent(savedNote);
+        if (!isEmptyObj(savedNote)){
+            if (savedNote?.note){
+                setNote(savedNote.note);
+            }
+            if(savedNote?.title){
+                setTitle(savedNote.title);
+            }
         }
     }
 
@@ -27,25 +34,52 @@ export default function  NoteLayout({}) {
     }
 
     const saveNoteToLocalStore = () => {
-        localNoteContent.setValue(noteContent);
+        if (!isSaved){
+            setIsSaved(true);
+            localNoteContent.setValue({note, title});
+        }
     }
 
     const exportToGoogleKeep = () => {
         alert('exportToGoogleKeep')
     }
+
+    const handleChangeNoteField = (fieldName: string, fieldValue: string) => {
+        setIsSaved(false);
+
+        switch (fieldName) {
+            case "title":
+                setTitle(fieldValue);
+                break;
+            case "note":
+                setNote(fieldValue);
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         <div>
             <div className={`flex-row header ${isExtensionDragging ? "moving" : ""}`}
                 onMouseDown={startDraggingExtension}
                 onMouseUp={stopDraggingExtension}
             >
-                Your note:
+                <input
+                    className='input-title'
+                    onBlur={saveNoteToLocalStore}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeNoteField('title', e.target.value)}
+                    value={title}
+                    onDragStart={event => event.preventDefault()}
+                >
+                </input>
             </div>
             <textarea className="note-content"
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNoteContent(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChangeNoteField('note', e.target.value)}
                 suppressContentEditableWarning
                 onBlur={saveNoteToLocalStore}
-                value={noteContent}
+                value={note}
+                onDragStart={event => event.preventDefault()}
             />
             {/* <button onClick={exportToGoogleKeep}>Export to Google keep</button> */}
         </div>

@@ -28,7 +28,6 @@ export default defineContentScript({
 
         wrapper.style.cssText = `
             position: absolute;
-            background-color: rgb(255 244 173);
             height: 270px;
             box-sizing: content-box;
             width: ${EXT_WIDTH}px;
