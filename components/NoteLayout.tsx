@@ -1,7 +1,8 @@
 import React from 'react'
+import { sendMessage } from 'webext-bridge/popup';
+import DraggableExtension from './DraggableExtensionLayout';
 
 export default function  NoteLayout({}) {
-    const [isExtensionDragging, setIsExtensionDragging] = useState<boolean>(false);
     const [note, setNote] = useState<string>("");
     const [title, setTitle] = useState<string>("Your note");
     const [isSaved, setIsSaved] = useState<boolean>(false);
@@ -23,16 +24,6 @@ export default function  NoteLayout({}) {
         }
     }
 
-    const startDraggingExtension = () => {
-      setIsExtensionDragging(true)
-      document.body.style.userSelect = 'none';
-    }
-
-    const stopDraggingExtension = () => {
-        setIsExtensionDragging(false)
-        document.body.style.userSelect = 'auto';
-    }
-
     const saveNoteToLocalStore = () => {
         if (!isSaved){
             setIsSaved(true);
@@ -40,9 +31,18 @@ export default function  NoteLayout({}) {
         }
     }
 
-    const exportToGoogleKeep = () => {
-        alert('exportToGoogleKeep')
-    }
+    const exportToGoogleKeep = async () => {
+        try {
+          const res = await sendMessage(
+            "startGoogleAuthFlow",
+            { key: 'value' },
+            "background"
+          );
+          console.log('Response from background:', res);
+        } catch (error) {
+          console.error('Error sending message:', error);
+        }
+      };
 
     const handleChangeNoteField = (fieldName: string, fieldValue: string) => {
         setIsSaved(false);
@@ -60,11 +60,8 @@ export default function  NoteLayout({}) {
     }
 
     return (
-        <div>
-            <div className={`flex-row header ${isExtensionDragging ? "moving" : ""}`}
-                onMouseDown={startDraggingExtension}
-                onMouseUp={stopDraggingExtension}
-            >
+        <DraggableExtension>
+            <div className="flex-row header">
                 <input
                     className='input-title'
                     onBlur={saveNoteToLocalStore}
@@ -81,7 +78,7 @@ export default function  NoteLayout({}) {
                 value={note}
                 onDragStart={event => event.preventDefault()}
             />
-            {/* <button onClick={exportToGoogleKeep}>Export to Google keep</button> */}
-        </div>
+            <button onClick={exportToGoogleKeep}>Auth with Google</button>
+        </DraggableExtension>
     )
 }
