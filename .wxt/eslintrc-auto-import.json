@@ -1,6 +1,7 @@
 {
   "globals": {
     "ContentScriptContext": true,
+    "DraggableExtensionLayout": true,
     "InvalidMatchPattern": true,
     "MatchPattern": true,
     "MigrationError": true,
@@ -17,6 +18,9 @@
     "defineWxtPlugin": true,
     "fakeBrowser": true,
     "injectScript": true,
+    "isEmptyObj": true,
+    "localNoteContent": true,
+    "localNotePosition": true,
     "storage": true,
     "useAppConfig": true,
     "useCallback": true,

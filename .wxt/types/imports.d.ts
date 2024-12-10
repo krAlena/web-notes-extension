@@ -2,6 +2,7 @@
 export {}
 declare global {
   const ContentScriptContext: typeof import('wxt/client')['ContentScriptContext']
+  const DraggableExtensionLayout: typeof import('D:/My/WXT/web-notes-ext/components/DraggableExtensionLayout')['default']
   const InvalidMatchPattern: typeof import('wxt/sandbox')['InvalidMatchPattern']
   const MatchPattern: typeof import('wxt/sandbox')['MatchPattern']
   const MigrationError: typeof import('wxt/storage')['MigrationError']
@@ -18,6 +19,9 @@ declare global {
   const defineWxtPlugin: typeof import('wxt/sandbox')['defineWxtPlugin']
   const fakeBrowser: typeof import('wxt/testing')['fakeBrowser']
   const injectScript: typeof import('wxt/client')['injectScript']
+  const isEmptyObj: typeof import('D:/My/WXT/web-notes-ext/utils/globalFuncs')['isEmptyObj']
+  const localNoteContent: typeof import('D:/My/WXT/web-notes-ext/utils/storage')['localNoteContent']
+  const localNotePosition: typeof import('D:/My/WXT/web-notes-ext/utils/storage')['localNotePosition']
   const storage: typeof import('wxt/storage')['storage']
   const useAppConfig: typeof import('wxt/client')['useAppConfig']
   const useCallback: typeof import('react')['useCallback']
