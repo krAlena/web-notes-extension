@@ -1,0 +1,70 @@
+@use "variables"
+@use "mixins"
+
+svg.icon,
+.icon
+  height: variables.$icon-size
+  width: variables.$icon-size
+  min-width: variables.$icon-size
+  margin: 0px 4px
+  cursor: pointer
+  &:before
+    content: ''
+    position: absolute
+    top: -10px
+    right: -10px
+    bottom: -10px
+    left: -10px
+    cursor: pointer
+  &.disabled
+    opacity: 0.6
+    pointer-events: none
+    > *
+      pointer-events: none
+  &.without-margin
+    margin: 0px
+  &.without-margin-left
+    margin: 0px 0px
+    margin-right: variables.$margin-quarter-value
+  &.without-margin-right
+    margin: 0px 0px
+    margin-left: variables.$margin-quarter-value
+  &.margin-left-zero
+    margin-left: 0px
+
+  &.stroke-color,
+  &.stroke-fill-color
+    path
+      stroke: variables.$icon-color !important
+    circle
+      stroke: variables.$icon-color !important
+    rect
+      stroke: variables.$icon-color !important
+    &.white
+      @include mixins.colored_stroke_icon(white)
+    &.green
+      @include mixins.colored_stroke_icon(variables.$color-green-meadow)
+    &.gray
+      @include mixins.colored_stroke_icon(variables.$color-beige-gray)
+    &.red
+      @include mixins.colored_stroke_icon(variables.$color-red-mint)
+    &.hover-green
+      &:hover
+        @include mixins.colored_stroke_icon(variables.$color-green-meadow)
+    &.hover-red
+      &:hover
+        @include mixins.colored_stroke_icon(variables.$color-red-mint)
+  &:not(.without-def-color):not(.stroke-color)
+    path
+      fill: variables.$icon-color !important
+    circle
+      fill: variables.$icon-color !important
+    rect
+      fill: variables.$icon-color !important
+    &.white
+      @include mixins.colored_icon(white)
+    &.gray
+      @include mixins.colored_icon(variables.$color-beige-gray)
+    &.hover-red
+      &:hover
+        @include mixins.colored_icon(variables.$color-red-mint)

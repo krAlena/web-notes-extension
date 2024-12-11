@@ -1,17 +1,17 @@
 import "./style.css";
+import "../../styles/default.sass";
+import "../../styles/mainLayout.sass";
+
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { localNotePosition } from "@/utils/storage.ts";
-
-const EXT_WIDTH = 200;
-const EXT_HEIGHT = 300;
 
 export default defineContentScript({
   matches: ["*://*/*"],
   cssInjectionMode: "ui",
 
   async main(ctx) {
-    const storedStartPosition = await localNotePosition.getValue();
+    // const storedStartPosition = await localNotePosition.getValue();
 
     const ui = await createShadowRootUi(ctx, {
       name: "wxt-react-example",
@@ -23,8 +23,8 @@ export default defineContentScript({
         const wrapper = document.createElement("div");
         wrapper.id = "pluginNotesWrapper"
 
-        let xCoordinate = storedStartPosition ? storedStartPosition.x + "px" : `calc( 100% - ${EXT_WIDTH}px - 20px)`;
-        let yCoordinate = storedStartPosition ? storedStartPosition.y + "px" : `20px`;
+        // let xCoordinate = storedStartPosition ? storedStartPosition.x + "px" : `calc( 100% - ${EXT_WIDTH}px - 20px)`;
+        // let yCoordinate = storedStartPosition ? storedStartPosition.y + "px" : `20px`;
 
         wrapper.style.cssText = `
             position: absolute;

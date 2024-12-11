@@ -1,0 +1,75 @@
+@use "variables"
+
+@mixin placeholder($color: $placeholder-color, $font-family: inherit, $font-size: 12px, $font-weight: 300)
+  &::placeholder
+    color: $color
+    font-family: $font-family
+    font-size: $font-size
+    font-weight: $font-weight
+    opacity: 1
+  &:-ms-input-placeholder
+    color: $color
+    font-family: $font-family
+    font-size: $font-size
+    font-weight: $font-weight
+  &::-ms-input-placeholder
+    color: $color
+    font-family: $font-family
+    font-size: $font-size
+    font-weight: $font-weight
+  &::-webkit-input-placeholder        
+    color: $color
+    font-size: $font-size
+  &:-moz-placeholder        
+    color: $color
+    font-size: $font-size
+  &::-moz-placeholder        
+    color: $color
+    font-size: $font-size
+
+@mixin line_dot()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+@mixin multi_line_dot($number-lines: 2)
+  display: -webkit-box
+  -webkit-line-clamp: $number-lines
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: normal
+
+@mixin colored_icon($icon-color: #74788d)
+  path
+    fill: $icon-color !important
+  circle
+    fill: $icon-color !important
+  rect
+    fill: $icon-color !important
+@mixin colored_stroke_icon($icon-color: #74788d)
+  path
+    stroke: $icon-color !important
+  circle
+    stroke: $icon-color !important
+  rect
+    stroke: $icon-color !important
+@mixin flex()
+  display: -webkit-box     ///* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box        //* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox     //* TWEENER - IE 10 */
+  display: -webkit-flex    //* NEW - Chrome */
+  display: flex            //* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+@mixin flex_important()
+  display: -webkit-box  !important    ///* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box     !important    //* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox  !important    //* TWEENER - IE 10 */
+  display: -webkit-flex !important   //* NEW - Chrome */
+  display: flex         !important
+
+@mixin transition($propName, $transTime: 1s, $transType: linear)
+  transition: $propName $transTime $transType !important
+  -moz-transition: $propName $transTime $transType !important
+  -webkit-transition: $propName $transTime $transType !important
+  -o-transition: $propName $transTime $transType !important
