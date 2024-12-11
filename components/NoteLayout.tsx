@@ -71,14 +71,18 @@ export default function  NoteLayout({}) {
                 >
                 </input>
             </div>
-            <textarea className="note-content"
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChangeNoteField('note', e.target.value)}
-                suppressContentEditableWarning
-                onBlur={saveNoteToLocalStore}
-                value={note}
-                onDragStart={event => event.preventDefault()}
-            />
-            <button onClick={exportToGoogleKeep}>Auth with Google</button>
-        </DraggableExtension>
+            <div className='flex-col main-content'>
+                <textarea className="note-content"
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => handleChangeNoteField('note', e.target.value)}
+                    suppressContentEditableWarning
+                    onBlur={saveNoteToLocalStore}
+                    value={note}
+                    onDragStart={event => event.preventDefault()}
+                />
+                <div className='flex-row footer'>
+                    <button onClick={exportToGoogleKeep}>Auth with Google</button>
+                </div>
+            </div>
+            </DraggableExtension>
     )
 }

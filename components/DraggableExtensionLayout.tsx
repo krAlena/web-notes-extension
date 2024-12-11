@@ -1,4 +1,7 @@
 import React, { useRef, useState } from "react";
+import DragAndDropSvgIcon from "./Icons/DragAndDropSvgIcon";
+import { EXT_HEIGHT, EXT_PARENT_PADDING, EXT_WIDTH } from "@/constants/global";
+import { localNotePosition } from "@/utils/storage.ts";
 
 interface DraggableExtensionProps {
     children: React.ReactNode; // Allows passing any content inside the draggable container
@@ -7,8 +10,27 @@ interface DraggableExtensionProps {
 const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => {
     const pluginRef = useRef<HTMLDivElement | null>(null); // Reference to the parent element
     const [isDragging, setIsDragging] = useState(false);
-    const positionRef = useRef({ x: 0, y: 0 }); // Tracks the current position
-    const offsetRef = useRef({ x: 0, y: 0 });  // Tracks the initial click offset
+    const positionRef = useRef<{x: number, y: number}>({ x: 0, y: 0 }); // Tracks the current position
+    const offsetRef = useRef<{x: number, y: number}>({ x: 0, y: 0 });  // Tracks the initial click offset
+    const [isExistStartPosition, setIsExistStartPosition] = useState<boolean>(false);
+
+    useEffect(() => {
+        async function readStoredPosition() {
+            const storedStartPosition = await localNotePosition.getValue();
+            const windowWidth = window.innerWidth;
+            let xCoordinate = storedStartPosition ? storedStartPosition.x : (windowWidth - EXT_WIDTH - EXT_PARENT_PADDING);
+            let yCoordinate = storedStartPosition ? storedStartPosition.y : EXT_PARENT_PADDING;
+
+            positionRef.current = {
+                x: xCoordinate,
+                y: yCoordinate,
+            }
+            console.log(positionRef.current)
+            setIsExistStartPosition(true);
+        }
+
+        readStoredPosition();
+    }, [])
 
     const startDragging = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         setIsDragging(true);
@@ -37,8 +59,23 @@ const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => 
         const newX = e.clientX - offsetRef.current.x;
         const newY = e.clientY - offsetRef.current.y;
 
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        let deltaX = e.clientX - offsetRef.current.x;
+        const newLeft = Math.min(
+            Math.max(deltaX, EXT_PARENT_PADDING),
+            windowWidth - EXT_WIDTH - EXT_PARENT_PADDING
+        );
+
+        let deltaY = e.clientY - offsetRef.current.y;
+        const newTop = Math.min(
+            Math.max(deltaY, EXT_PARENT_PADDING),
+            windowHeight - EXT_HEIGHT - EXT_PARENT_PADDING
+        );
+
         // Update positionRef
-        positionRef.current = { x: newX, y: newY };
+        positionRef.current = { x: newLeft, y: newTop };
 
         // Update the position via transform
         const parent = pluginRef.current;
@@ -54,23 +91,28 @@ const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => 
         // Remove listeners
         document.removeEventListener("mousemove", moveElement);
         document.removeEventListener("mouseup", stopDragging);
+
+        console.log("offsetRef", offsetRef.current)
+        void localNotePosition.setValue({ x: positionRef.current.x, y: positionRef.current.y});
     };
+
+    if (!isExistStartPosition) {
+        return null; // Or a loading spinner
+    }
 
     return (
         <div
             id="pluginNotes"
             ref={pluginRef}
             style={{
-                position: "fixed",
-                transform: `translate(${positionRef.x}px, ${positionRef.y}px)`,
-
+                transform: `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`,
             }}
         >
             <div
                 id="draggablePoint"
                 onMouseDown={startDragging}
             >
-                Drag me
+                <DragAndDropSvgIcon className="moveIcon icon without-margin"/>
             </div>
             {children}
         </div>
