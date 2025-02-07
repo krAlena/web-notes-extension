@@ -23,7 +23,7 @@ export default defineContentScript({
         wrapper.style.cssText = `
             position: absolute;
             box-sizing: content-box;
-            z-index: 1000;
+            z-index: 9999;
             display: flex;
           `;
 

@@ -13,16 +13,16 @@ export default defineConfig({
   manifest: {
     manifest_version: 3,
     name: "Web notes",
-    key: process.env.EXTENSION_KEY,
+    key: process.env.VITE_EXTENSION_KEY,
     version: "1.0",
     version_name: "1.0.1-alpha1",
     permissions: ["tabs", "activeTab", "storage", "identity"],
     oauth2: {
-      client_id: process.env.GOOGLE_AUTH_CLIENT_ID,
+      client_id: process.env.VITE_GOOGLE_AUTH_CLIENT_ID,
       scopes: [
         "openId",
-        "profile"
-        // "https://www.googleapis.com/auth/keep",
+        "profile",
+        "https://www.googleapis.com/auth/keep"
         // "https://www.googleapis.com/auth/userinfo.email"
       ]
     },
