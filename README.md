@@ -2,6 +2,10 @@
 
 **Web Notes** is a cross-browser extension developed using [WXT](https://github.com/wxt-dev/wxt). This project supports both **Manifest V2** and **Manifest V3**, enabling compatibility across multiple browsers, including Chrome and Firefox.
 
+<img src="https://github.com/user-attachments/assets/54442029-22c7-4f66-8a57-23a697a490fe" alt="Note ext image" width="500" height="auto">
+
+<img src="https://github.com/user-attachments/assets/5a4eff48-c8ae-46eb-a569-75dfff2e2ef3" alt="Google auth img" width="300" height="auto">
+
 ## Features
 
 - Cross-browser support.
