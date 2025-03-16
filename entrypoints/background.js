@@ -38,7 +38,9 @@ export default defineBackground(() => {
 async function authenticateWithGoogle() {
     const clientId = import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID;
     const redirectUri = `https://${import.meta.env.VITE_EXTENSION_ID}.chromiumapp.org`
-    const scopes = "https://www.googleapis.com/auth/userinfo.profile";
+    // const scopes = "https://www.googleapis.com/auth/userinfo.profile";
+    const scopes = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/keep";
+
     // "https://www.googleapis.com/auth/keep";
 
     const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${encodeURIComponent(clientId)}&redirect_uri=${redirectUri}&response_type=token&scope=${encodeURIComponent(scopes)}`;

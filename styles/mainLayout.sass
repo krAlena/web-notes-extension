@@ -9,6 +9,24 @@
     box-shadow: variables.$box-shadow
     position: fixed
     // transition: transform 0.3s ease-in-out //For smoother movements
+    &.miminized
+        border: 1px solid rgb(221, 221, 221)
+        height: 50px
+        width: 50px
+        border-radius: 50%
+        display: flex
+        align-items: center
+        justify-content: center
+        padding: 12px
+        box-sizing: border-box
+        cursor: pointer
+    #minimizationBtn
+        height: 16px
+        width: 16px
+        position: absolute
+        top: 2px
+        right: 8px
+        cursor: pointer
     #draggablePoint
         position: absolute
         left: 3px

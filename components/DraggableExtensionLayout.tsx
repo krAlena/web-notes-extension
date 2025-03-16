@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import DragAndDropSvgIcon from "./Icons/DragAndDropSvgIcon";
 import { EXT_HEIGHT, EXT_PARENT_PADDING, EXT_WIDTH } from "@/constants/global";
 import { localNotePosition } from "@/utils/storage.ts";
+import MinSvgIcon from "./Icons/MinSvgIcon";
 
 interface DraggableExtensionProps {
     children: React.ReactNode; // Allows passing any content inside the draggable container
@@ -13,6 +14,7 @@ const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => 
     const positionRef = useRef<{x: number, y: number}>({ x: 0, y: 0 }); // Tracks the current position
     const offsetRef = useRef<{x: number, y: number}>({ x: 0, y: 0 });  // Tracks the initial click offset
     const [isExistStartPosition, setIsExistStartPosition] = useState<boolean>(false);
+    const [isMinimizedView, setIsMinimizedView] = useState<boolean>(true);
 
     useEffect(() => {
         async function readStoredPosition() {
@@ -103,18 +105,33 @@ const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => 
     return (
         <div
             id="pluginNotes"
+            className={isMinimizedView ? "miminized" : ""}
             ref={pluginRef}
             style={{
                 transform: `translate(${positionRef.current.x}px, ${positionRef.current.y}px)`,
             }}
         >
-            <div
-                id="draggablePoint"
-                onMouseDown={startDragging}
-            >
-                <DragAndDropSvgIcon className="moveIcon icon without-margin"/>
-            </div>
-            {children}
+            {
+                !isMinimizedView
+                    ?   <>
+                            <div
+                                id="draggablePoint"
+                                onMouseDown={startDragging}
+                            >
+                                <DragAndDropSvgIcon className="moveIcon icon without-margin"/>
+                            </div>
+                            <div
+                                id="minimizationBtn"
+                                onClick={e => setIsMinimizedView(true)}
+                                title="minimization"
+                            >
+                                <MinSvgIcon className="moveIcon icon without-margin"/>
+                            </div>
+                            {children}
+                        </>
+                    :   <img src={chrome.runtime.getURL("icon/32.png")} alt="logo" id="minimizedLogo" onClick={e => setIsMinimizedView(false)}/>
+            }
+
         </div>
     );
 };

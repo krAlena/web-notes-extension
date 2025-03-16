@@ -41,7 +41,7 @@ export default function  NoteLayout({}) {
             );
             console.log('Response from background:', res);
             let token = res?.receivedData || "";
-            // createGKeepNote(token);
+            createGKeepNote(token);
         } catch (error) {
 
             console.error('Error sending message:', error);

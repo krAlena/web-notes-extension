@@ -44,6 +44,12 @@ export default defineConfig({
         ],
         js: ["content-scripts/content.js"]
       }
+    ],
+    web_accessible_resources: [
+      {
+        "resources": ["icon/*.png"],
+        "matches": ["<all_urls>"]
+      }
     ]
   }
 });
