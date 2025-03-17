@@ -47,7 +47,7 @@ export default defineConfig({
     ],
     web_accessible_resources: [
       {
-        "resources": ["icon/*.png"],
+        "resources": ["icon/*.png", "illustration/*.png"],
         "matches": ["<all_urls>"]
       }
     ]

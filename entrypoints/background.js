@@ -37,9 +37,9 @@ export default defineBackground(() => {
 
 async function authenticateWithGoogle() {
     const clientId = import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID;
-    const redirectUri = `https://${import.meta.env.VITE_EXTENSION_ID}.chromiumapp.org`
-    // const scopes = "https://www.googleapis.com/auth/userinfo.profile";
-    const scopes = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/keep";
+    const redirectUri = `https://${import.meta.env.VITE_EXTENSION_ID}.chromiumapp.org`;
+    const scopes = "https://www.googleapis.com/auth/userinfo.profile";
+    // const scopes = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/keep";
 
     // "https://www.googleapis.com/auth/keep";
 
@@ -55,8 +55,12 @@ async function authenticateWithGoogle() {
 
         // Parsing the result
         console.log('Authentication result:', result);
-
+        // chrome.tabs.create({ url: chrome.runtime.getURL("entrypoints/newtab/welcomeUser.html") });
         // Do something with the result (e.g., extracting token or user info)
+        await browser.tabs.create({
+          url: browser.runtime.getURL("/welcome-google-user.html"),
+          active: true,
+        });
         return result;
     }
     catch (error) {

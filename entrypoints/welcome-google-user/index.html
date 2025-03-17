@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <style>
+        body {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          height: 100%;
+          margin: 0px;
+          position: relative;
+        }
+        img {
+          height: 30%;
+          width: auto;
+        }
+        .image-parent{
+          margin: 2pc;
+        }
+    </style>
+    <!-- Set include/exclude if the page should be removed from some builds
+    <meta name="manifest.include" content="['chrome', ...]" />
+    <meta name="manifest.exclude" content="['chrome', ...]" /> -->
+  </head>
+  <body>
+    <!-- ... -->
+    <h1>Hi!</h1>
+    <div class="image-parent">
+      <img src="illustration/relax.png" alt="Greeting img"/>
+    </div>
+    <div class="footer">
+      <button id="closeBtn">Got it!</button>
+    </div>
+    <script type="module" src="./main.ts"></script>
+
+  </body>
+</html>
