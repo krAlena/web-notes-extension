@@ -5,20 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          height: 100%;
-          margin: 0px;
-          position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+            padding: 20vh 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .footer {
+            margin-top: 20px;
+        }
+        .welcome-msg {
+          width: 400px;
+          margin: auto;
+        }
+        .image-container {
+            height: 50vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         img {
-          height: 30%;
-          width: auto;
+            max-width: 100%;
+            max-height: 100%;
+
         }
-        .image-parent{
-          margin: 2pc;
+        #avatar{
+          height: 50px;
+          width: 50px;
+          margin: 12px;
+          border-radius: 50%;
         }
     </style>
     <!-- Set include/exclude if the page should be removed from some builds
@@ -26,15 +57,21 @@
     <meta name="manifest.exclude" content="['chrome', ...]" /> -->
   </head>
   <body>
-    <!-- ... -->
-    <h1>Hi!</h1>
-    <div class="image-parent">
-      <img src="illustration/relax.png" alt="Greeting img"/>
+    <div class="container">
+      <header class="header">
+          <h1>Hi!</h1>
+          <h1 id="name"></h1>
+          <img id="avatar"/>
+          <p class="welcome-msg">Welcome to Web Notes! Gather all your notes in one place with this useful and convenient tool, designed to streamline your web research.</p>
+      </header>
+      <div class="image-container">
+        <img src="illustration/relax.png" alt="Greeting img"/>
+      </div>
+      <footer class="footer">
+        <button id="closeBtn">Got it!</button>
+      </footer>
     </div>
-    <div class="footer">
-      <button id="closeBtn">Got it!</button>
-    </div>
-    <script type="module" src="./main.ts"></script>
+    <script type="module" src="./welcomeGoogleUser.ts"></script>
 
   </body>
 </html>

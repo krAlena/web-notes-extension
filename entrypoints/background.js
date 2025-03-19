@@ -3,10 +3,28 @@ import { browser } from "wxt/browser";
 // import { CONFIG } from "../.config";
 let responseCache = null;
 
+async function fetchUserProfile(accessToken) {
+    try {
+      const response = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+  
+      const user = await response.json();
+      console.log("UserProfileData:", user);
+  
+      await browser.storage.local.set({ user });
+    //   await browser.tabs.create({
+    //     url: browser.runtime.getURL("/welcome-google-user.html"),
+    //     active: true,
+    //   });
+    } catch (error) {
+      console.error(error);
+    }
+}
 export default defineBackground(() => {
     onMessage ("startGoogleAuthFlow", async ({ data, sender }) => {
 
-        let token = null;
+        let accessToken = null;
         try {
             // Call an async function to authenticate with Google
             const resp = await authenticateWithGoogle();
@@ -15,14 +33,31 @@ export default defineBackground(() => {
             console.log('Google authentication response:', resp);
             let resultUrl = new URL(resp);
             const params = new URLSearchParams(resultUrl?.hash.replace('#', ''));
-            token = params.get("access_token");
-            responseCache = { success: true, receivedData: token };
+            const accessToken = params.get("access_token");
+
+            if (accessToken) {
+                fetchUserProfile(accessToken);
+                //   fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+                //     headers: { Authorization: `Bearer ${accessToken}` }
+                //   })
+                //   .then(response => response.json())
+                //   .then(user => {
+                //     console.log("UserProfileData:", user);
+                //     await browser.storage.local.set({ user });
+                //     await browser.tabs.create({
+                //         url: browser.runtime.getURL("/welcome-google-user.html"),
+                //         active: true,
+                //     });
+                //   })
+                //   .catch(console.error);
+            }
+            responseCache = { success: true, receivedData: accessToken };
             console.log('params: ', params)
             // callback({ success: true, receivedData: token })
             return responseCache;
         } catch (error) {
             console.error('Authentication failed:', error);
-            return { success: false, receivedData: token };
+            return { success: false, receivedData: accessToken };
         }
         // Optional: send a response back
         // return loadUserPreferences(sync);
@@ -58,8 +93,8 @@ async function authenticateWithGoogle() {
         // chrome.tabs.create({ url: chrome.runtime.getURL("entrypoints/newtab/welcomeUser.html") });
         // Do something with the result (e.g., extracting token or user info)
         await browser.tabs.create({
-          url: browser.runtime.getURL("/welcome-google-user.html"),
-          active: true,
+            url: browser.runtime.getURL("/welcome-google-user.html"),
+            active: true,
         });
         return result;
     }
