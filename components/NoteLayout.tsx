@@ -4,6 +4,8 @@ import { sendMessage } from "webext-bridge/popup";
 import DraggableExtension from './DraggableExtensionLayout';
 import useSpeechRecognition from "../utils/hooks/useSpeechRecognitionHook.ts";
 import MicrophoneSvgIcon from './Icons/MicrophoneSvgIcon.tsx';
+import StopSvgIcon from './Icons/StopSvgIcon.tsx';
+import Microphone from './Microphone.tsx';
 
 export default function  NoteLayout({}) {
     const [note, setNote] = useState<string>("");
@@ -104,10 +106,10 @@ export default function  NoteLayout({}) {
                     onDragStart={event => event.preventDefault()}
                 />
                 <div className='flex-row footer'>
-                    {/* <button onClick={authWithGoogle}>Auth with Google</button> */}
-                    <MicrophoneSvgIcon
-                        onClick={!isListening ? handleStartListening : handleStopListening}
-                        className="icon stroke-color without-margin"
+                    <Microphone
+                        isListening={isListening}
+                        onStart={handleStartListening}
+                        onStop={handleStopListening}
                     />
                 </div>
             </div>

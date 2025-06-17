@@ -5,6 +5,7 @@ declare global {
   const DraggableExtensionLayout: typeof import('D:/My/Extensions/WXT/web-notes-ext/components/DraggableExtensionLayout')['default']
   const InvalidMatchPattern: typeof import('wxt/sandbox')['InvalidMatchPattern']
   const MatchPattern: typeof import('wxt/sandbox')['MatchPattern']
+  const Microphone: typeof import('D:/My/Extensions/WXT/web-notes-ext/components/Microphone')['default']
   const MigrationError: typeof import('wxt/storage')['MigrationError']
   const NoteLayout: typeof import('D:/My/Extensions/WXT/web-notes-ext/components/NoteLayout')['default']
   const browser: typeof import('wxt/browser')['browser']

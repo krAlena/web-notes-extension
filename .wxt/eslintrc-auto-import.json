@@ -4,6 +4,7 @@
     "DraggableExtensionLayout": true,
     "InvalidMatchPattern": true,
     "MatchPattern": true,
+    "Microphone": true,
     "MigrationError": true,
     "NoteLayout": true,
     "browser": true,

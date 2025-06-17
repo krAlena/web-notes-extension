@@ -221,6 +221,18 @@ svg.icon:not(.without-def-color):not(.stroke-color).white rect,
 .icon:not(.without-def-color):not(.stroke-color).white rect {
   fill: white !important;
 }
+svg.icon:not(.without-def-color):not(.stroke-color).red path,
+.icon:not(.without-def-color):not(.stroke-color).red path {
+  fill: #E43A45 !important;
+}
+svg.icon:not(.without-def-color):not(.stroke-color).red circle,
+.icon:not(.without-def-color):not(.stroke-color).red circle {
+  fill: #E43A45 !important;
+}
+svg.icon:not(.without-def-color):not(.stroke-color).red rect,
+.icon:not(.without-def-color):not(.stroke-color).red rect {
+  fill: #E43A45 !important;
+}
 svg.icon:not(.without-def-color):not(.stroke-color).gray path,
 .icon:not(.without-def-color):not(.stroke-color).gray path {
   fill: #B3A9A7 !important;
@@ -441,5 +453,63 @@ svg.icon:not(.without-def-color):not(.stroke-color).hover-red:hover rect,
   color: #443235;
 }
 #pluginNotes .main-content .footer {
-  padding: 8px 0px;
+  justify-content: space-around;
+}._microphone-wrapper_1pg31_1 {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+._stop-icon_1pg31_11 {
+  z-index: 2 !important;
+  height: 12px !important;
+  width: 12px !important;
+}
+
+._mic-icon_1pg31_17 {
+  font-size: 16px;
+  z-index: 2;
+}
+
+._wave_1pg31_22 {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: #654A4E;
+  border-radius: 50%;
+}
+._wave_1pg31_22._static_1pg31_29 {
+  opacity: 0.7;
+  z-index: 0;
+  height: 26px;
+  width: 26px;
+}
+._wave_1pg31_22:not(._static_1pg31_29) {
+  opacity: 0;
+  animation: _pulse_1pg31_1 2s infinite;
+  z-index: 1;
+}
+._wave_1pg31_22._wave1_1pg31_40 {
+  animation-delay: 0.4s;
+}
+._wave_1pg31_22._wave2_1pg31_43 {
+  animation-delay: 0.8s;
+}
+
+@keyframes _pulse_1pg31_1 {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
 }
