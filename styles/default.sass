@@ -31,7 +31,10 @@ svg.icon,
     margin-left: variables.$margin-quarter-value
   &.margin-left-zero
     margin-left: 0px
-
+  &.medium
+    height: variables.$icon-medium-size
+    width: variables.$icon-medium-size
+    min-width: variables.$icon-medium-size
   &.stroke-color,
   &.stroke-fill-color
     path
@@ -68,3 +71,65 @@ svg.icon,
     &.hover-red
       &:hover
         @include mixins.colored_icon(variables.$color-red-mint)
+.padding-icon-parent
+  padding-top: 4px
+  padding-bottom: 4px
+  padding-left: 4px
+  padding-right: 4px
+  &.no-left
+    padding-left: 0px
+.padding-top
+  padding-top: variables.$padding-half-value
+  &-small
+    padding-top: variables.$padding-quarter-value
+  &-big
+    padding-top: variables.$padding-value
+.padding-bottom
+  padding-bottom: variables.$padding-half-value
+  &-small
+    padding-bottom: variables.$padding-quarter-value
+  &-big
+    padding-bottom: variables.$padding-value
+.padding-left
+  padding-left: variables.$padding-half-value
+  &-small
+    padding-left: variables.$padding-quarter-value
+  &-big
+    padding-left: variables.$padding-value
+.padding-right
+  padding-right: variables.$padding-half-value
+  &-small
+    padding-right: variables.$padding-quarter-value
+  &-big
+    padding-right: variables.$padding-value
+
+.margin-top
+  margin-top: variables.$margin-half-value
+  &-small
+    margin-top: variables.$margin-quarter-value
+  &-big
+    margin-top: variables.$margin-value
+.margin-bottom
+  margin-bottom: variables.$margin-half-value
+  &-small
+    margin-bottom: variables.$margin-quarter-value
+  &-big
+    margin-bottom: variables.$margin-value
+.margin-left
+  margin-left: variables.$margin-half-value
+  &-small
+    margin-left: variables.$margin-quarter-value
+  &-big
+    margin-left: variables.$margin-value
+.margin-right
+  margin-right: variables.$margin-half-value
+  &-small
+    margin-right: variables.$margin-quarter-value
+  &-big
+    margin-right: variables.$margin-value
+.flex-row
+  @include mixins.flex()
+  flex-direction: row
+.flex-col
+  @include mixins.flex()
+  flex-direction: column

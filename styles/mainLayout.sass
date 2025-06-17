@@ -8,8 +8,9 @@
     z-index: 1000
     box-shadow: variables.$box-shadow
     position: fixed
-    // transition: transform 0.3s ease-in-out //For smoother movements
+    // transition: transform 0.3s ease-in-out
     &.miminized
+        // animation: crumple 0.3s ease-in-out forwards
         border: 1px solid rgb(221, 221, 221)
         height: 50px
         width: 50px
@@ -20,6 +21,15 @@
         padding: 12px
         box-sizing: border-box
         cursor: pointer
+    .top-toolbar
+        display: flex
+        padding: 3px 4px
+        align-items: center
+        justify-content: flex-end
+        .avatar
+            height: 24px
+            width: 24px
+            border-radius: 50%
     #minimizationBtn
         height: 16px
         width: 16px
@@ -29,12 +39,13 @@
         cursor: pointer
     #draggablePoint
         position: absolute
-        left: 3px
-        top: 13px
+        top: 11px
+        left: 4px
         height: 16px
         width:  16px
         cursor: move
         display: none
+        z-index: 1000
         .moveIcon
             cursor: move !important
     &:hover #draggablePoint
@@ -42,19 +53,21 @@
     .header
         font-weight: 600
         box-sizing: content-box !important
-        height: 44px
-        width: 168px
+        height: 40px
+        width: 150px
         align-self: center
         display: flex
         align-items: center
         color: var(--color-brown-dark)
-
+        position: absolute
+        top: 0
         .input-title
             font-weight: 600
             outline: none
             border: none
-            padding-left: 20px
+            padding-left: 22px
             background: transparent
+            width: calc(100% - 40px)
     .main-content
         padding: 0px 16px
         textarea.note-content
