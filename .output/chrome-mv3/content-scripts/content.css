@@ -438,6 +438,7 @@ svg.icon:not(.without-def-color):not(.stroke-color).hover-red:hover rect,
   padding-left: 22px;
   background: transparent;
   width: calc(100% - 40px);
+  color: #443235;
 }
 #pluginNotes .main-content {
   padding: 0px 16px;
@@ -454,6 +455,7 @@ svg.icon:not(.without-def-color):not(.stroke-color).hover-red:hover rect,
 }
 #pluginNotes .main-content .footer {
   justify-content: space-around;
+  align-items: center;
 }._microphone-wrapper_1pg31_1 {
   position: relative;
   width: 40px;

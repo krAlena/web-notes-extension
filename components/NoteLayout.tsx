@@ -3,9 +3,9 @@ import React from 'react'
 import { sendMessage } from "webext-bridge/popup";
 import DraggableExtension from './DraggableExtensionLayout';
 import useSpeechRecognition from "../utils/hooks/useSpeechRecognitionHook.ts";
-import MicrophoneSvgIcon from './Icons/MicrophoneSvgIcon.tsx';
-import StopSvgIcon from './Icons/StopSvgIcon.tsx';
 import Microphone from './Microphone.tsx';
+import ClearSvgIcon from './Icons/ClearSvgIcon.tsx';
+import CopySvgIcon from './Icons/CopySvgIcon.tsx';
 
 export default function  NoteLayout({}) {
     const [note, setNote] = useState<string>("");
@@ -77,13 +77,18 @@ export default function  NoteLayout({}) {
         startListening();
     };
 
-    const handleCopyTranscript = async () => {
+    const copyNoteToClipboard = async () => {
         try {
-            await navigator.clipboard.writeText(finalText || text);
+            await navigator.clipboard.writeText(note);
         } catch (err) {
             console.error('Failed to copy transcript:', err);
         }
     };
+
+    const clearNoteContent = () => {
+        setNote("");
+        setIsSaved(false);
+    }
 
     return (
         <DraggableExtension>
@@ -105,11 +110,21 @@ export default function  NoteLayout({}) {
                     value={note}
                     onDragStart={event => event.preventDefault()}
                 />
-                <div className='flex-row footer'>
+                <div className='flex-row center footer'>
+                    <CopySvgIcon
+                        className='icon stroke-color'
+                        title='Copy'
+                        onClick={copyNoteToClipboard}
+                    />
                     <Microphone
                         isListening={isListening}
                         onStart={handleStartListening}
                         onStop={handleStopListening}
+                    />
+                    <ClearSvgIcon
+                        className='icon stroke-color'
+                        title='Clear note'
+                        onClick={clearNoteContent}
                     />
                 </div>
             </div>
