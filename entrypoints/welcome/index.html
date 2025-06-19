@@ -100,11 +100,16 @@
             align-items: center;
             justify-content: center;
         }
+
+        img[src] {
+          display: block;
+        }
         img {
+            display: none;
             max-width: 100%;
             max-height: 100%;
-
         }
+
         #avatar{
             height: 80px;
             min-height: 80px;
@@ -145,7 +150,7 @@
     <script>
       var typed = new Typed('#typedMsg', {
         strings: ['Hello there!', 'Gather all your notes in one place with this useful and convenient tool, designed to streamline your web research.'],
-        typeSpeed: 90,
+        typeSpeed: 30,
         startDelay: 500,
         backDelay: 1000,
         backSpeed: 35,

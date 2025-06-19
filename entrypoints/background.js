@@ -3,18 +3,30 @@ import { browser } from "wxt/browser";
 // import { CONFIG } from "../.config";
 let responseCache = null;
 
+
+browser.runtime.onInstalled.addListener(async ({ reason }) => {
+    if (reason !== "install") return;
+
+
+    // Open a tab on install
+    await browser.tabs.create({
+        url: browser.runtime.getURL("/welcome.html"),
+        active: true,
+    });
+});
+
 async function fetchUserProfile(accessToken) {
     try {
       const response = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
-  
+
       const user = await response.json();
       console.log("UserProfileData:", user);
-  
+
       await browser.storage.local.set({ user });
     //   await browser.tabs.create({
-    //     url: browser.runtime.getURL("/welcome-google-user.html"),
+    //     url: browser.runtime.getURL("/welcome.html"),
     //     active: true,
     //   });
     } catch (error) {
@@ -45,7 +57,7 @@ export default defineBackground(() => {
                 //     console.log("UserProfileData:", user);
                 //     await browser.storage.local.set({ user });
                 //     await browser.tabs.create({
-                //         url: browser.runtime.getURL("/welcome-google-user.html"),
+                //         url: browser.runtime.getURL("/welcome.html"),
                 //         active: true,
                 //     });
                 //   })
@@ -88,7 +100,7 @@ async function authenticateWithGoogle() {
         // chrome.tabs.create({ url: chrome.runtime.getURL("entrypoints/newtab/welcomeUser.html") });
         // Do something with the result (e.g., extracting token or user info)
         await browser.tabs.create({
-            url: browser.runtime.getURL("/welcome-google-user.html"),
+            url: browser.runtime.getURL("/welcome.html"),
             active: true,
         });
         return result;

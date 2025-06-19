@@ -13,7 +13,7 @@ declare module "wxt/browser" {
     | "/icon/96.png"
     | "/illustration/relax.png"
     | "/illustration/welcome.svg"
-    | "/welcome-google-user.html"
+    | "/welcome.html"
   type HtmlPublicPath = Extract<PublicPath, `${string}.html`>
   export interface WxtRuntime {
     getURL(path: PublicPath): string;
