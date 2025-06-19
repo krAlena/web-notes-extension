@@ -47,7 +47,7 @@ export default defineConfig({
     ],
     web_accessible_resources: [
       {
-        "resources": ["icon/*.png", "illustration/*.png"],
+        "resources": ["icon/*.png", "illustration/*.png", "utils/typed.umd.js"],
         "matches": ["<all_urls>"]
       }
     ]

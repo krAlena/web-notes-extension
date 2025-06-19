@@ -9,6 +9,7 @@ import CopySvgIcon from './Icons/CopySvgIcon.tsx';
 
 export default function  NoteLayout({}) {
     const [note, setNote] = useState<string>("");
+    const [baseNote, setBaseNote] = useState<string>("");
     const [title, setTitle] = useState<string>("Your note");
     const [isSaved, setIsSaved] = useState<boolean>(false);
     const { text, finalText, startListening, stopListening, isListening, hasRecognitionSupport } = useSpeechRecognition();
@@ -18,9 +19,18 @@ export default function  NoteLayout({}) {
     }, []);
 
     useEffect(() => {
-        if (isSaved) return;
-        localNoteContent.setValue({note, title});
+        // if (isSaved) return;
+        // localNoteContent.setValue({note, title});
+        saveNoteToLocalStore();
     }, [note, title]);
+
+    useEffect(() => {
+        // Only update note with interim speech text if listening and text is not empty
+        if (isListening && text !== "") {
+            // Show the note plus the current interim text (not yet committed)
+            setNote(baseNote + " " + text);
+        }
+    }, [text, isListening]);
 
     async function readNoteFromStorage() {
         let savedNote = await localNoteContent.getValue();
@@ -36,13 +46,11 @@ export default function  NoteLayout({}) {
     }
 
     const saveNoteToLocalStore = () => {
-        // if (!isSaved){
-        setIsSaved(true);
-        localNoteContent.setValue({note, title});
-        // }
+        if (!isSaved){
+            setIsSaved(true);
+            localNoteContent.setValue({note, title});
+        }
     }
-
-
 
     const handleChangeNoteField = (fieldName: string, fieldValue: string) => {
         setIsSaved(false);
@@ -61,14 +69,16 @@ export default function  NoteLayout({}) {
 
     const handleStartListening = () => {
         // Must be called directly from a user action
+        setBaseNote(note);
         startListening();
     };
 
     const handleStopListening = () => {
         stopListening();
 
-        let newNoteContent = note + " " + text;
-        setNote(newNoteContent);
+        // let newNoteContent = note + " " + text;
+        // setNote(newNoteContent);
+        setBaseNote("");
         setIsSaved(false);
     };
 

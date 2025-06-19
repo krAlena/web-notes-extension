@@ -47,7 +47,8 @@
     {
       "resources": [
         "icon/*.png",
-        "illustration/*.png"
+        "illustration/*.png",
+        "utils/typed.umd.js"
       ],
       "matches": [
         "<all_urls>"

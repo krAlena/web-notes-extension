@@ -16,15 +16,18 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            height: 100vh;
-            padding: 20vh 0;
+            overflow: hidden;
+            /* height: 100vh;
+            padding: 20vh 0; */
         }
         .container {
             width: 80%;
             max-width: 800px;
         }
         .header {
-            margin-bottom: 20px;
+            margin-top: 40px;
+            position: absolute;
+            top: 0px;
         }
         .footer {
             margin-top: 20px;
@@ -33,9 +36,37 @@
           width: 400px;
           margin: auto;
         }
+        .welcome-msg {
+          margin: auto;
+          background: white;
+          width: 220px;
+          height: 181px;
+          margin-left: 285px;
+          margin-top: -290px;
+          padding: 8px;
+          border-radius: 12px;
+          /* border: 2px solid #263238; */
+          position: absolute;
+          text-align: left;
+          font-size: 13px;
+        }
+        #closeBtn {
+          position: absolute;
+          bottom: 422px;
+          margin-left: 605px;
+          padding: 8px 12px;
+          border-radius: 12px;
+          color: white;
+          background: #654A4E;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+          cursor: pointer;
+        }
+        #closeBtn:hover {
+          background: #443235;
+        }
         .image-container {
-            height: 50vh;
-            min-height: 300px;
+            height: 800px;
+            min-height: 800px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,32 +77,56 @@
 
         }
         #avatar{
-          height: 50px;
-          width: 50px;
-          margin: 12px;
-          border-radius: 50%;
+            height: 80px;
+            min-height: 80px;
+            width: 80px;
+            margin: 12px;
+            border-radius: 50%;
+            position: absolute;
+            top: 177px;
+            margin-left: -284px;
         }
     </style>
-    <!-- Set include/exclude if the page should be removed from some builds
-    <meta name="manifest.include" content="['chrome', ...]" />
-    <meta name="manifest.exclude" content="['chrome', ...]" /> -->
   </head>
   <body>
     <div class="container">
-      <header class="header">
+      <!-- <header class="header">
           <h1>Hi!</h1>
           <h1 id="name"></h1>
+          <h1 class="arsenal-bold">Welcome to Web Notes!</h1>
           <img id="avatar"/>
-          <p class="welcome-msg">Welcome to Web Notes! Gather all your notes in one place with this useful and convenient tool, designed to streamline your web research.</p>
-      </header>
+      </header> -->
       <div class="image-container">
-        <img src="illustration/relax.png" alt="Greeting img"/>
+        <div class="header">
+            <!-- <h1>Hi!</h1>
+            <h1 id="name"></h1> -->
+            <h1 class="arsenal-bold">Welcome to Web Notes!</h1>
+            <img id="avatar"/>
+        </div>
+        <!-- <img src="illustration/relax.png" alt="Greeting img"/> -->
+        <div id="typedMsg" class="welcome-msg"></div>
+        <img src="illustration/welcome.svg" alt="Greeting img" class="welcome-img"/>
       </div>
       <footer class="footer">
-        <button id="closeBtn">Got it!</button>
+        <div id="closeBtn">Got it!</div>
       </footer>
     </div>
     <script type="module" src="./welcomeGoogleUser.ts"></script>
+    <script type="module" src="../../utils/typed.umd.js"></script>
+    <script>
+      var typed = new Typed('#typedMsg', {
+        strings: ['Hello there!', 'Gather all your notes in one place with this useful and convenient tool, designed to streamline your web research.'],
+        typeSpeed: 70,
+        startDelay: 500,
+        backDelay: 1000,
+        backSpeed: 35,
+        // fadeOut: true,
+        loop: true,
+        loopCount: 1,
+        showCursor: false
+        // cursorChar: '...'
 
+      });
+    </script>
   </body>
 </html>
