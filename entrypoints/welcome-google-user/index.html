@@ -4,7 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
     <style>
+        .gentium-plus-regular {
+          font-family: "Gentium Plus", serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        .gentium-plus-bold {
+          font-family: "Gentium Plus", serif;
+          font-weight: 700;
+          font-style: normal;
+        }
+
+        .gentium-plus-regular-italic {
+          font-family: "Gentium Plus", serif;
+          font-weight: 400;
+          font-style: italic;
+        }
+
+        .gentium-plus-bold-italic {
+          font-family: "Gentium Plus", serif;
+          font-weight: 700;
+          font-style: italic;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -28,6 +55,7 @@
             margin-top: 40px;
             position: absolute;
             top: 0px;
+            font-size: 20px;
         }
         .footer {
             margin-top: 20px;
@@ -48,9 +76,10 @@
           /* border: 2px solid #263238; */
           position: absolute;
           text-align: left;
-          font-size: 13px;
+          font-size: 16px;
         }
         #closeBtn {
+          font-size: 13px;
           position: absolute;
           bottom: 422px;
           margin-left: 605px;
@@ -100,15 +129,15 @@
         <div class="header">
             <!-- <h1>Hi!</h1>
             <h1 id="name"></h1> -->
-            <h1 class="arsenal-bold">Welcome to Web Notes!</h1>
+            <h1 class="gentium-plus-bold-italic">Welcome to Web Notes!</h1>
             <img id="avatar"/>
         </div>
         <!-- <img src="illustration/relax.png" alt="Greeting img"/> -->
-        <div id="typedMsg" class="welcome-msg"></div>
+        <div id="typedMsg" class="welcome-msg gentium-plus-regular"></div>
         <img src="illustration/welcome.svg" alt="Greeting img" class="welcome-img"/>
       </div>
       <footer class="footer">
-        <div id="closeBtn">Got it!</div>
+        <div id="closeBtn" class="gentium-plus-regular">Got it!</div>
       </footer>
     </div>
     <script type="module" src="./welcomeGoogleUser.ts"></script>
@@ -116,7 +145,7 @@
     <script>
       var typed = new Typed('#typedMsg', {
         strings: ['Hello there!', 'Gather all your notes in one place with this useful and convenient tool, designed to streamline your web research.'],
-        typeSpeed: 70,
+        typeSpeed: 90,
         startDelay: 500,
         backDelay: 1000,
         backSpeed: 35,
