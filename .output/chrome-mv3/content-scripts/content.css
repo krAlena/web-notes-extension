@@ -452,6 +452,8 @@ svg.icon:not(.without-def-color):not(.stroke-color).hover-red:hover rect,
   line-height: 23px;
   width: 100%;
   color: #443235;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 #pluginNotes .main-content .footer {
   justify-content: space-around;

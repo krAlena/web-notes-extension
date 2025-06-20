@@ -4,7 +4,6 @@ import * as dotenv from "dotenv";
 // Load environment variables
 dotenv.config();
 
-// See https://wxt.dev/api/config.html
 export default defineConfig({
   modules: ["@wxt-dev/module-react"],
   runner: {
@@ -13,6 +12,7 @@ export default defineConfig({
   manifest: {
     manifest_version: 3,
     name: "Web notes",
+    description: "Quickly write, paste, or dictate notes directly in the browser.",
     key: process.env.VITE_EXTENSION_KEY,
     version: "1.0",
     version_name: "1.0.1-alpha1",
@@ -47,7 +47,11 @@ export default defineConfig({
     ],
     web_accessible_resources: [
       {
-        "resources": ["icon/*.png", "illustration/*.png", "utils/typed.umd.js"],
+        "resources": [
+          "icon/*.png",
+          "illustration/*.png",
+          "utils/typed.umd.js"
+        ],
         "matches": ["<all_urls>"]
       }
     ]

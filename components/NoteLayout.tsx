@@ -26,11 +26,11 @@ export default function  NoteLayout({}) {
 
     useEffect(() => {
         // Only update note with interim speech text if listening and text is not empty
-        if (isListening && text !== "") {
+        if (isListening && finalText !== "") {
             // Show the note plus the current interim text (not yet committed)
-            setNote(baseNote + " " + text);
+            setNote(baseNote + " " + finalText);
         }
-    }, [text, isListening]);
+    }, [finalText, isListening]);
 
     async function readNoteFromStorage() {
         let savedNote = await localNoteContent.getValue();
@@ -80,11 +80,6 @@ export default function  NoteLayout({}) {
         // setNote(newNoteContent);
         setBaseNote("");
         setIsSaved(false);
-    };
-
-    const handleRestartListening = () => {
-        stopListening();
-        startListening();
     };
 
     const copyNoteToClipboard = async () => {
