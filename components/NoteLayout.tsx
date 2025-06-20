@@ -19,6 +19,21 @@ export default function  NoteLayout({}) {
     }, []);
 
     useEffect(() => {
+        // Handler for tab/window activation
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === "visible") {
+                readNoteFromStorage();
+            }
+        };
+
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+
+        return () => {
+            document.removeEventListener("visibilitychange", handleVisibilityChange);
+        };
+    }, []);
+
+    useEffect(() => {
         // if (isSaved) return;
         // localNoteContent.setValue({note, title});
         saveNoteToLocalStore();
@@ -46,10 +61,11 @@ export default function  NoteLayout({}) {
     }
 
     const saveNoteToLocalStore = () => {
-        if (!isSaved){
+        console.log('saveNoteToLocalStore');
+        // if (!isSaved){
             setIsSaved(true);
             localNoteContent.setValue({note, title});
-        }
+        // }
     }
 
     const handleChangeNoteField = (fieldName: string, fieldValue: string) => {
