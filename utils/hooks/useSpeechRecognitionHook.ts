@@ -63,6 +63,27 @@ const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasRecognitionSupport]);
 
+  useEffect(() => {
+    if (!recognitionRef.current) return;
+
+    recognitionRef.current.onresult = (event) => {
+      console.log("onresult event:", event);
+
+      let finalTranscript = "";
+
+      for (let i = 0; i < event.results.length; i++) {
+        finalTranscript += event.results[i][0].transcript;
+      }
+
+      setFinalText(finalTranscript);
+    };
+
+    recognitionRef.current.onend = () => {
+      // If you want to keep listening even after pause
+      if (isListening) recognitionRef?.current?.start();
+    };
+}, [isListening]);
+
   const startListening = () => {
     if (!recognitionRef.current) return;
     setText("");
