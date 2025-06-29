@@ -5,6 +5,22 @@ let responseCache = null;
 
 
 browser.runtime.onInstalled.addListener(async ({ reason }) => {
+    browser.contextMenus.create({
+        id: "toNote",
+        title: "Add to note",
+        contexts: ["selection"]
+    });
+
+    browser.contextMenus.onClicked.addListener((info, tab) => {
+        console.log('try to send msg from context bckg to CS:', info);
+        if (info.menuItemId == "toNote") {
+            browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+                browser.tabs.sendMessage(tabs[0].id, { action: "copyToNote", info });
+            });
+        }
+    });
+
+
     if (reason !== "install") return;
 
 

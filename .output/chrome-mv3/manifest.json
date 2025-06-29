@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Web notes",
+  "description": "Quickly write, paste, or dictate notes directly in the browser.",
   "version": "1.0",
   "icons": {
     "16": "icon/16.png",
@@ -16,6 +17,7 @@
     "activeTab",
     "storage",
     "identity",
+    "contextMenus",
     "scripting"
   ],
   "oauth2": {

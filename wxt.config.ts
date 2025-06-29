@@ -16,7 +16,7 @@ export default defineConfig({
     key: process.env.VITE_EXTENSION_KEY,
     version: "1.0",
     version_name: "1.0.1-alpha1",
-    permissions: ["tabs", "activeTab", "storage", "identity"],
+    permissions: ["tabs", "activeTab", "storage", "identity", "contextMenus"],
     oauth2: {
       client_id: process.env.VITE_GOOGLE_AUTH_CLIENT_ID,
       scopes: [
@@ -43,6 +43,7 @@ export default defineConfig({
           "*://newtab/*",
         ],
         js: ["content-scripts/content.js"]
+        // css: ["content-scripts/content.css"]
       }
     ],
     web_accessible_resources: [

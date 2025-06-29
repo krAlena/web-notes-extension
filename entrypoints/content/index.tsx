@@ -5,6 +5,19 @@ import "../../styles/mainLayout.sass";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 
+browser.runtime.onMessage.addListener((event) => {
+    if (event.action === "copyToNote") {
+        // dynamic mount by user action via messaging.
+        localNoteContent.getValue().then(res => {
+          console.log('currentNote', res)
+          const prevNote = res.note || '';
+          let newNote = (prevNote == '') ? event.info.selectionText : prevNote +  '\n'  + event.info.selectionText;
+
+          localNoteContent.setValue({note: newNote , title: res.title});
+        })
+    }
+});
+
 export default defineContentScript({
   matches: ["*://*/*"],
   cssInjectionMode: "ui",
