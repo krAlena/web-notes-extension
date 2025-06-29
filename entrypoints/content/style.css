@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@font-face {
+  font-family: 'Arsenal';
+  src: url('../../public/font/Arsenal-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
 
+@font-face {
+  font-family: 'Arsenal';
+  src: url('../../public/font/Arsenal-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
 
 :root {
   --color-brown-dark: #443235;
