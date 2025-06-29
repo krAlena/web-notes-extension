@@ -1,6 +1,4 @@
 import React from 'react'
-// import { sendMessage } from 'webext-bridge/popup';
-import { sendMessage } from "webext-bridge/popup";
 import DraggableExtension from './DraggableExtensionLayout';
 import useSpeechRecognition from "../utils/hooks/useSpeechRecognitionHook.ts";
 import Microphone from './Microphone.tsx';
@@ -16,6 +14,19 @@ export default function  NoteLayout({}) {
 
     useEffect(() => {
         readNoteFromStorage();
+
+        function handleStorageChange(changes, areaName) {
+
+            if (areaName === "local" && changes['note-content'].newValue.note) {
+                if (changes['note-content'].newValue.note != note){
+                    setNote(changes['note-content'].newValue.note || "");
+                }
+            }
+        }
+
+        if (browser && browser.storage && browser.storage.onChanged) {
+            browser.storage.onChanged.addListener(handleStorageChange);
+        }
     }, []);
 
     useEffect(() => {
