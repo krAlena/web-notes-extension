@@ -6,13 +6,15 @@ interface UseSpeechRecognitionReturn {
   isListening: boolean;
   startListening: () => void;
   stopListening: () => void;
+  changeLang: (newLang: string) => void;
   hasRecognitionSupport: boolean;
 }
 
-const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
+const useSpeechRecognition = (recognitionLang: string): UseSpeechRecognitionReturn => {
   const [isListening, setIsListening] = useState(false);
   const [text, setText] = useState("");
   const [finalText, setFinalText] = useState("");
+  const [lang, setLang] = useState(recognitionLang); // local lang state
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   const hasRecognitionSupport = typeof window !== "undefined" && "webkitSpeechRecognition" in window;
@@ -23,7 +25,8 @@ const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
     // @ts-ignore
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
-    recognition.lang = "en-US";
+    recognition.lang = lang;
+    // "en-US";
     recognition.interimResults = true;
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
@@ -61,7 +64,7 @@ const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
     };
     // Only run once
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasRecognitionSupport]);
+  }, [hasRecognitionSupport, recognitionLang]);
 
   useEffect(() => {
     if (!recognitionRef.current) return;
@@ -98,12 +101,21 @@ const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
     recognitionRef.current.stop();
   };
 
+  const changeLang = (newLang: string) => {
+    stopListening();
+    setLang(newLang);
+    setTimeout(() => {
+      startListening();
+    }, 300); // Wait for recognition to fully stop
+  };
+
   return {
     text,
     finalText,
     isListening,
     startListening,
     stopListening,
+    changeLang,
     hasRecognitionSupport,
   };
 };

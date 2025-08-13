@@ -4,6 +4,7 @@ declare global {
   const ContentScriptContext: typeof import('wxt/client')['ContentScriptContext']
   const DraggableExtensionLayout: typeof import('D:/My/Extensions/WXT/web-notes-ext/components/DraggableExtensionLayout')['default']
   const InvalidMatchPattern: typeof import('wxt/sandbox')['InvalidMatchPattern']
+  const LanguageSelector: typeof import('D:/My/Extensions/WXT/web-notes-ext/components/LanguageSelector')['default']
   const MatchPattern: typeof import('wxt/sandbox')['MatchPattern']
   const Microphone: typeof import('D:/My/Extensions/WXT/web-notes-ext/components/Microphone')['default']
   const MigrationError: typeof import('wxt/storage')['MigrationError']

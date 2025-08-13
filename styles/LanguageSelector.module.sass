@@ -1,0 +1,33 @@
+@use "variables"
+@use "mixins"
+
+.ext-dropdown
+  border-radius: 8px
+  background: #23272f
+  color: #e0e0e0
+  border: 1px solid #444
+  padding: 6px 12px
+  font-size: 1rem
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08)
+  outline: none
+  cursor: pointer
+  width: 100%
+
+
+/* Show dropdown upwards by positioning */
+.ext-dropdown:focus
+  position: relative
+  z-index: 10
+
+
+/* Option styling */
+.ext-dropdown option
+  background: #23272f
+  color: #e0e0e0
+  border-radius: 6px
+  padding: 4px 10px
+
+
+/* Remove default arrow for custom look */
+.ext-dropdown::-ms-expand
+  display: none

@@ -3,6 +3,7 @@
     "ContentScriptContext": true,
     "DraggableExtensionLayout": true,
     "InvalidMatchPattern": true,
+    "LanguageSelector": true,
     "MatchPattern": true,
     "Microphone": true,
     "MigrationError": true,

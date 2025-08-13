@@ -16,7 +16,7 @@ export default defineConfig({
     key: process.env.VITE_EXTENSION_KEY,
     version: "1.1",
     version_name: "1.0.3",
-    permissions: ["tabs", "activeTab", "storage",  "contextMenus"],
+    permissions: ["tabs", "activeTab", "storage",  "contextMenus", "scripting"],
     // "identity",
     // oauth2: {
     //   client_id: process.env.VITE_GOOGLE_AUTH_CLIENT_ID,

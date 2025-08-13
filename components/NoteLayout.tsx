@@ -3,17 +3,18 @@ import DraggableExtension from './DraggableExtensionLayout';
 import useSpeechRecognition from "../public/utils/hooks/useSpeechRecognitionHook.ts";
 import { localNoteContent } from '../public/utils/storage';
 import { isEmptyObj } from '../public/utils/globalFuncs.js';
-
+import LanguageSelector from './LanguageSelector.tsx';
 import Microphone from './Microphone.tsx';
 import ClearSvgIcon from './Icons/ClearSvgIcon.tsx';
 import CopySvgIcon from './Icons/CopySvgIcon.tsx';
 
 export default function  NoteLayout({}) {
+    const [recognitionLang, setRecognitionLang] = useState<string>(navigator.language);
     const [note, setNote] = useState<string>("");
     const [baseNote, setBaseNote] = useState<string>("");
     const [title, setTitle] = useState<string>("Your note");
     const [isSaved, setIsSaved] = useState<boolean>(false);
-    const { text, finalText, startListening, stopListening, isListening, hasRecognitionSupport } = useSpeechRecognition();
+    const { text, finalText, startListening, stopListening, changeLang, isListening, hasRecognitionSupport } = useSpeechRecognition(recognitionLang);
 
     useEffect(() => {
         readNoteFromStorage();
@@ -125,6 +126,11 @@ export default function  NoteLayout({}) {
         setIsSaved(false);
     }
 
+    const handleChangeLanguage = (langCode: string) => {
+        setRecognitionLang(langCode);
+        changeLang(langCode);
+    };
+
     return (
         <DraggableExtension>
             <div className="flex-row header">
@@ -156,11 +162,18 @@ export default function  NoteLayout({}) {
                         onStart={handleStartListening}
                         onStop={handleStopListening}
                     />
-                    <ClearSvgIcon
-                        className='icon stroke-color'
-                        title='Clear note'
-                        onClick={clearNoteContent}
-                    />
+                    {
+                        isListening
+                            ?   <LanguageSelector
+                                    defLang={recognitionLang}
+                                    onChange={(langCode: string) => handleChangeLanguage(langCode)}
+                                />
+                            :   <ClearSvgIcon
+                                    className='icon stroke-color'
+                                    title='Clear note'
+                                    onClick={clearNoteContent}
+                                />
+                    }
                 </div>
             </div>
             </DraggableExtension>
