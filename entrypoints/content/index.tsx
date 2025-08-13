@@ -1,6 +1,7 @@
 import "./style.css";
 import "../../styles/default.sass";
 import "../../styles/mainLayout.sass";
+import { localNoteContent } from '../../public/utils/storage';
 
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";

@@ -17,6 +17,12 @@ declare module "wxt/browser" {
     | "/icon/96.png"
     | "/illustration/relax.png"
     | "/illustration/welcome.svg"
+    | "/utils/api.js"
+    | "/utils/globalFuncs.js"
+    | "/utils/hooks/useSpeechRecognitionHook.ts"
+    | "/utils/storage.ts"
+    | "/utils/typed.umd.js"
+    | "/utils/types/speechRecognition.ts"
     | "/welcome.html"
   type HtmlPublicPath = Extract<PublicPath, `${string}.html`>
   export interface WxtRuntime {

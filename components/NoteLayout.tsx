@@ -1,6 +1,9 @@
 import React from 'react'
 import DraggableExtension from './DraggableExtensionLayout';
-import useSpeechRecognition from "../utils/hooks/useSpeechRecognitionHook.ts";
+import useSpeechRecognition from "../public/utils/hooks/useSpeechRecognitionHook.ts";
+import { localNoteContent } from '../public/utils/storage';
+import { isEmptyObj } from '../public/utils/globalFuncs.js';
+
 import Microphone from './Microphone.tsx';
 import ClearSvgIcon from './Icons/ClearSvgIcon.tsx';
 import CopySvgIcon from './Icons/CopySvgIcon.tsx';
@@ -45,10 +48,10 @@ export default function  NoteLayout({}) {
     }, []);
 
     useEffect(() => {
-        // if (isSaved) return;
+        if (isSaved) return;
         // localNoteContent.setValue({note, title});
         saveNoteToLocalStore();
-    }, [note, title]);
+    }, [note, title, isSaved]);
 
     useEffect(() => {
         // Only update note with interim speech text if listening and text is not empty
@@ -73,10 +76,10 @@ export default function  NoteLayout({}) {
 
     const saveNoteToLocalStore = () => {
         console.log('saveNoteToLocalStore');
-        // if (!isSaved){
+        if (!isSaved){
             setIsSaved(true);
             localNoteContent.setValue({note, title});
-        // }
+        }
     }
 
     const handleChangeNoteField = (fieldName: string, fieldValue: string) => {

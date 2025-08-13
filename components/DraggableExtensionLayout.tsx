@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { sendMessage } from "webext-bridge/popup";
 import DragAndDropSvgIcon from "./Icons/DragAndDropSvgIcon";
 import { EXT_HEIGHT, EXT_PARENT_PADDING, EXT_WIDTH } from "@/constants/global";
-import { localNotePosition } from "@/utils/storage.ts";
+import { localNotePosition } from "@/public/utils/storage";
 import MinSvgIcon from "./Icons/MinSvgIcon";
 import LoginSvgIcon from "./Icons/LoginSvgIcon";
 
@@ -212,7 +212,7 @@ const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => 
                                         className="moveIcon icon without-margin"
                                     />
                                 </div>
-                                {
+                                {/* {
                                     !isUserLoggedIn
                                         ?   <div
                                                 className="padding-icon-parent"
@@ -224,7 +224,7 @@ const DraggableExtension: React.FC<DraggableExtensionProps> = ({ children }) => 
                                                     className="moveIcon icon medium without-margin stroke-color"/>
                                             </div>
                                         :   <img className="avatar" src={currentUser?.picture} alt="avatar"/>
-                                }
+                                } */}
                             </div>
                             {children}
                         </>

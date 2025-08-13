@@ -14,18 +14,19 @@ export default defineConfig({
     name: "Web notes",
     description: "Quickly write, paste, or dictate notes directly in the browser.",
     key: process.env.VITE_EXTENSION_KEY,
-    version: "1.0",
-    version_name: "1.0.1-alpha1",
-    permissions: ["tabs", "activeTab", "storage", "identity", "contextMenus"],
-    oauth2: {
-      client_id: process.env.VITE_GOOGLE_AUTH_CLIENT_ID,
-      scopes: [
-        "openId",
-        "profile",
-        "https://www.googleapis.com/auth/keep"
-        // "https://www.googleapis.com/auth/userinfo.email"
-      ]
-    },
+    version: "1.1",
+    version_name: "1.0.3",
+    permissions: ["tabs", "activeTab", "storage",  "contextMenus"],
+    // "identity",
+    // oauth2: {
+    //   client_id: process.env.VITE_GOOGLE_AUTH_CLIENT_ID,
+    //   scopes: [
+    //     "openId",
+    //     "profile",
+    //     "https://www.googleapis.com/auth/keep"
+    //     // "https://www.googleapis.com/auth/userinfo.email"
+    //   ]
+    // },
     background: {
       service_worker: "background.js"
     },
@@ -51,7 +52,8 @@ export default defineConfig({
         "resources": [
           "icon/*.png",
           "illustration/*.png",
-          "utils/typed.umd.js"
+          "utils/typed.umd.js",
+          "font/*.ttf"
         ],
         "matches": ["<all_urls>"]
       }
