@@ -1,6 +1,7 @@
 import React from 'react'
 import DraggableExtension from './DraggableExtensionLayout';
 import useSpeechRecognition from "../public/utils/hooks/useSpeechRecognitionHook.ts";
+import useMicVolume from "../public/utils/hooks/useMicVolumeBarsHook.ts";
 import { localNoteContent } from '../public/utils/storage';
 import { isEmptyObj } from '../public/utils/globalFuncs.js';
 import LanguageSelector from './LanguageSelector.tsx';
@@ -15,6 +16,7 @@ export default function  NoteLayout({}) {
     const [title, setTitle] = useState<string>("Your note");
     const [isSaved, setIsSaved] = useState<boolean>(false);
     const { text, finalText, startListening, stopListening, changeLang, isListening, hasRecognitionSupport } = useSpeechRecognition(recognitionLang);
+    const volume = useMicVolume(isListening);
 
     useEffect(() => {
         readNoteFromStorage();
@@ -127,6 +129,7 @@ export default function  NoteLayout({}) {
     }
 
     const handleChangeLanguage = (langCode: string) => {
+        setBaseNote(note);
         setRecognitionLang(langCode);
         changeLang(langCode);
     };
@@ -152,6 +155,21 @@ export default function  NoteLayout({}) {
                     onDragStart={event => event.preventDefault()}
                 />
                 <div className='flex-row center footer'>
+                    {
+                        isListening
+                            ?   <div className="bars">
+                                    {[...Array(10)].map((_, i) => (
+                                        <div
+                                        key={i}
+                                        className="bar"
+                                        style={{
+                                            height: `${Math.max(10, volume * 100 - i * 5)}%`
+                                        }}
+                                        />
+                                    ))}
+                                </div>
+                            :  null
+                    }
                     <CopySvgIcon
                         className='icon stroke-color'
                         title='Copy'
@@ -163,15 +181,15 @@ export default function  NoteLayout({}) {
                         onStop={handleStopListening}
                     />
                     {
-                        isListening
-                            ?   <LanguageSelector
-                                    defLang={recognitionLang}
-                                    onChange={(langCode: string) => handleChangeLanguage(langCode)}
-                                />
-                            :   <ClearSvgIcon
+                        !isListening
+                            ?   <ClearSvgIcon
                                     className='icon stroke-color'
                                     title='Clear note'
                                     onClick={clearNoteContent}
+                                />
+                            :   <LanguageSelector
+                                    defLang={recognitionLang}
+                                    onChange={(langCode: string) => handleChangeLanguage(langCode)}
                                 />
                     }
                 </div>

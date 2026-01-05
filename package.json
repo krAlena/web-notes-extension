@@ -27,6 +27,6 @@
     "@wxt-dev/module-react": "^1.0.0",
     "sass-embedded": "^1.82.0",
     "typescript": "^5.4.5",
-    "wxt": "^0.19.10"
+    "wxt": "^0.20.13"
   }
 }

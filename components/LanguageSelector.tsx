@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "../styles/LanguageSelector.module.sass";
 
 interface Language {
   code: string;
@@ -38,7 +39,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ onChange, defLang }
   };
 
   return (
-    <select value={selectedLang} onChange={handleChange}>
+    <select value={selectedLang} className={styles["ext-dropdown"]} onChange={handleChange}>
       {languages.map(lang => (
         <option key={lang.code} value={lang.code}>
           {lang.code}

@@ -3,6 +3,7 @@ import "wxt/browser";
 
 declare module "wxt/browser" {
   export type PublicPath =
+    | ""
     | "/"
     | "/background.js"
     | "/content-scripts/content.js"
@@ -19,6 +20,7 @@ declare module "wxt/browser" {
     | "/illustration/welcome.svg"
     | "/utils/api.js"
     | "/utils/globalFuncs.js"
+    | "/utils/hooks/useMicVolumeBarsHook.ts"
     | "/utils/hooks/useSpeechRecognitionHook.ts"
     | "/utils/storage.ts"
     | "/utils/typed.umd.js"

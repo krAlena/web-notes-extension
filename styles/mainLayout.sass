@@ -83,6 +83,19 @@
             overflow-y: auto
             padding-right: 8px
         .footer
-            justify-content: space-around
+            justify-content: space-between
             align-items: center
-
+            padding: 0 8px
+            .bars
+                display: flex
+                gap: 4px
+                height: 40px
+                align-items: flex-end
+                margin-left: 32px
+                position: absolute
+                bottom: 54px
+                .bar
+                    width: 6px
+                    background: variables.$color-brown-light
+                    border-radius: 4px
+                    transition: height 0.1s
